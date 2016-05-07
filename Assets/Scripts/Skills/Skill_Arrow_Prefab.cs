@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System;
 
 public class Skill_Arrow_Prefab : MonoBehaviour {
 	Rigidbody2D rb;
@@ -12,10 +13,20 @@ public class Skill_Arrow_Prefab : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		Health h = other.GetComponent<Health>();
-		if(h!=null){
-			h.Damage(Health.DamageType.None, damage);
-			GameObject.Destroy(gameObject,0);
-		}
-	}
+        if (other.tag.Equals("Wall"))
+        {
+            GameObject.Destroy(gameObject, 5);
+        }
+        try
+        {
+
+            Health h = other.GetComponent<Health>();
+            if (h != null)
+            {
+                h.Damage(Health.DamageType.None, damage);
+                GameObject.Destroy(gameObject, 0);
+            }
+        }
+        catch (Exception) { };
+    }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Skill_Arrow : Skill {
@@ -26,7 +26,8 @@ public class Skill_Arrow : Skill {
 
 	protected override void OnCall ()
 	{
-		GameObject.Instantiate(Resources.Load(prefabName));
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject.Instantiate(Resources.Load(prefabName),player.transform.position, Quaternion.Euler(new Vector3(0,0,-90)));
 	}
 }
 
